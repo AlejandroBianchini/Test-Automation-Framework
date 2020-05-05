@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="GoogleSuite" verbose="10" parallel="tests" thread-count="5">
+<!--    <parameter name="driver" value="web"></parameter>-->
+
+    <parameter name="runHeadless" value="false"></parameter>
+
+    <test name="Chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <groups>
+            <run>
+<!--               <include name="Google"/>-->
+            </run>
+        </groups>
+
+        <classes>
+            <class name="testclasses.HomePageTest" />
+        </classes>
+    </test>
+
+    <test name="Firefox">
+        <parameter name="browser" value="firefox"></parameter>
+        <groups>
+            <run>
+                <!--               <include name="Google"/>-->
+            </run>
+        </groups>
+
+        <classes>
+            <class name="testclasses.HomePageTest" />
+        </classes>
+    </test>
+
+</suite>

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import utilities.CommonsFunctions;
 import utilities.Config;
+import utilities.GlobalVariablesReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,12 @@ public class HomePage extends CommonsFunctions {
     public HomePage(WebDriver driver) throws IOException {
         super(driver);
         PageFactory.initElements(driver, this);
+        Goto();
+    }
+
+    public void Goto() throws IOException {
+        String url = new GlobalVariablesReader().getProperty("url");
+        goTo(url);
     }
 
     public void Buscar() throws IOException, InvalidFormatException {

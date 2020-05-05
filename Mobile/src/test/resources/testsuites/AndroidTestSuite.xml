@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AndroidGoogleSuite" verbose="10" parallel="tests" thread-count="5">
+<!--    <parameter name="driver" value="web"></parameter>-->
+
+    <parameter name="runHeadless" value="false"></parameter>
+
+    <test name="Chrome">
+
+        <groups>
+            <run>
+<!--               <include name="Google"/>-->
+            </run>
+        </groups>
+
+        <classes>
+            <class name="testclasses.androidtest.AndroidGoogleTest" />
+        </classes>
+    </test>
+
+</suite>

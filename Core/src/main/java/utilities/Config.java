@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
-    private static final String PROPERTIES_FILE_LOCATION = "../Web/src/test/resources/config/Configuration.properties";
+    private static final String PROPERTIES_FILE_LOCATION = "../Core/src/main/resources/config/Configuration.properties";
 //            "../Test-Automation-Framework/Web/src/test/resources/config/Configuration.properties";
 
     private Properties properties = null;
@@ -62,7 +62,7 @@ public class Config {
             properties.put(Param.PLATFORMVERSION.getKey(), platformVersion);
         }
         if (!serverUrl.isEmpty()) {
-            properties.put(Param.KOBITONSERVERURL.getKey(), serverUrl);
+            properties.put(Param.SERVERURL.getKey(), serverUrl);
         }
         if (!deviceOrientation.isEmpty()) {
             properties.put(Param.DEVICEORIENTATION.getKey(), deviceOrientation);
@@ -121,9 +121,9 @@ public class Config {
         CUSTOM_CAPABILITIES("custom_capabilities"),
         PLATFORMNAME("platformName"),
         PLATFORMVERSION("platformVersion"),
-        KOBITONSERVERURL("kobitonServerUrl"),
+        SERVERURL("serverUrl"),
         DEVICEORIENTATION("deviceOrientation"),
-        CAPTURESCREENSHOTS("captureScreenshots"),
+//        CAPTURESCREENSHOTS("captureScreenshots"),
         DEVICEGROUP("deviceGroup"),
         BROWSERNAME("browserName"),
         APP("app"),

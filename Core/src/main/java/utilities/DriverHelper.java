@@ -1,5 +1,8 @@
 package utilities;
 
+import io.appium.java_client.MobileDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,8 +10,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +26,8 @@ public class DriverHelper {
     private static final String CHROME_DRIVER_LOCATION = "../Core/src/main/resources/drivers/chromedriver.exe";
     private static final String CHROME_CAPS_LOCATION = "capabilities/";
     private static final String IE_CAPS_LOCATION = "capabilities/IEOptions.properties";
+
+    private static DesiredCapabilities capabilities;
 
     public static WebDriver openBrowser(Config config) {
         Map<String, String> capabilitiesMap = null;
@@ -60,6 +67,61 @@ public class DriverHelper {
         }
 
     }
+
+    public static MobileDriver openDevice(Config config) throws MalformedURLException {
+        String appiumServerUrl = config.getConfig(Config.Param.SERVERURL.getKey()); // Set the server URL to be used in subsequent driver actions in the test script
+        String currentDirectory =System.getProperty("user.dir");
+//                "../Core/src/main/resources/mobiledrivers";
+
+//        currentDirectory = currentDirectory + "\\src\\test\\resources\\drivers";
+        currentDirectory = currentDirectory + "\\..\\Core\\src\\main\\resources\\mobiledrivers";
+        initializeAppiumDriverCapabilities(config);
+
+        switch (config.getConfig(Config.Param.PLATFORMNAME.getKey()).toLowerCase()) {
+            case "android":
+            case "droid":
+                capabilities.setCapability("chromedriverExecutableDir", currentDirectory);
+                return new AndroidDriver(new URL(appiumServerUrl), capabilities);
+            case "ios":
+                return new IOSDriver(new URL(appiumServerUrl), capabilities);
+            default:
+                return new AndroidDriver(new URL(appiumServerUrl), capabilities);
+        }
+    }
+
+    public static void initializeAppiumDriverCapabilities(Config config) {
+//        mobile = true;
+        capabilities = new DesiredCapabilities();
+        // The generated session will be visible to you only.
+        capabilities.setCapability("sessionName", "Automation test session");
+        capabilities.setCapability("deviceOrientation", config.getConfig(Config.Param.DEVICEORIENTATION.getKey()));
+//        capabilities.setCapability("captureScreenshots", Boolean.valueOf(config.getConfig(Config.Param.CAPTURESCREENSHOTS.getKey()).toLowerCase()));
+        capabilities.setCapability("deviceGroup", config.getConfig(Config.Param.DEVICEGROUP.getKey()));
+        capabilities.setCapability("autoAcceptAlerts", Boolean.valueOf(config.getConfig(Config.Param.AUTOACCEPTALERTS.getKey()).toLowerCase()));
+        capabilities.setCapability("noReset", config.getConfig(Config.Param.NORESET.getKey()));
+        capabilities.setCapability("fullReset", config.getConfig(Config.Param.FULLRESET.getKey()));
+        // For deviceName, platformVersion Kobiton supports wildcard
+        // character *, with 3 formats: *text, text* and *text*
+        // If there is no *, Kobiton will match the exact text provided
+        capabilities.setCapability("deviceName", config.getConfig(Config.Param.DEVICENAME.getKey()));
+        capabilities.setCapability("platformVersion", config.getConfig(Config.Param.PLATFORMVERSION.getKey()));
+        capabilities.setCapability("autoGrantPermissions", Boolean.valueOf(config.getConfig(Config.Param.AUTOGRANTPERMISSIONS.getKey()).toLowerCase()));
+        capabilities.setCapability("platformName", config.getConfig(Config.Param.PLATFORMNAME.getKey()));
+        capabilities.setCapability("appWaitActivity", config.getConfig(Config.Param.APPWAITACTIVITY.getKey()));
+        // Open either a specified app or a web browser in the mobile device
+        if (config.getConfig(Config.Param.APP.getKey()).isEmpty()) {
+            capabilities.setCapability("browserName", config.getConfig(Config.Param.BROWSERNAME.getKey()));
+        } else {
+            // The maximum size of application is 500MB
+            // By default, HTTP requests from testing library are expired
+            // in 2 minutes while the app copying and installation may
+            // take up-to 30 minutes. Therefore, you need to extend the HTTP
+            // request timeout duration in your testing library so that
+            // it doesn't interrupt while the device is being initialized.
+            capabilities.setCapability("app", config.getConfig(Config.Param.APP.getKey()));
+        }
+    }
+
 
     private static Map<String, String> loadCapabilities(String fileName) {
         Properties props = new Properties();

@@ -13,19 +13,20 @@ import java.io.IOException;
 
 public class HomePageTest extends BaseTest{
 
-    private HomePage HomePage;
+    private HomePage homePage;
     private WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest(ITestResult result) throws IOException {
         driver = getDriver();
-        HomePage = new HomePage(driver);
+        homePage = new HomePage(driver);
         report.startTest(result);
     }
 
     @Test(description = "probando test en diferentes category")
     public void pruebaOtraCategoryDeReporte() throws InvalidFormatException, IOException {
-        HomePage.Buscar();
+
+        homePage.Buscar();
 
         Assert.assertTrue(true);
     }

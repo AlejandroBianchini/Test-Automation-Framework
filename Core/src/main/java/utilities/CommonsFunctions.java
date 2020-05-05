@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Optional;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +16,11 @@ public class CommonsFunctions {
 
     protected CommonsFunctions(WebDriver _driver) throws IOException {
         driver = _driver;
-        String url = new GlobalVariablesReader().getProperty("url");
-        goTo(url);
+//        String url = new GlobalVariablesReader().getProperty("url");
+//        goTo(url);
     }
 
-    private static void goTo(String url){
+    public static void goTo(String url){
         driver.get(url);
     }
 

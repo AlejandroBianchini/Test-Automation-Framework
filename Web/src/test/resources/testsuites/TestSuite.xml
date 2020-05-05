@@ -17,17 +17,17 @@
         </classes>
     </test>
 
-    <test name="Firefox">
-        <parameter name="browser" value="firefox"></parameter>
-        <groups>
-            <run>
-                <!--               <include name="Google"/>-->
-            </run>
-        </groups>
+<!--    <test name="Firefox">-->
+<!--        <parameter name="browser" value="firefox"></parameter>-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                &lt;!&ndash;               <include name="Google"/>&ndash;&gt;-->
+<!--            </run>-->
+<!--        </groups>-->
 
-        <classes>
-            <class name="testclasses.HomePageTest" />
-        </classes>
-    </test>
+<!--        <classes>-->
+<!--            <class name="testclasses.HomePageTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

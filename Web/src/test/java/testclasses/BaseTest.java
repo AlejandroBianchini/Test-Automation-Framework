@@ -11,7 +11,6 @@ import utilities.Report;
 public class BaseTest {
     public Report report = new Report();
     Config configurations = null;
-//    public WebDriver driver;
 
     @BeforeSuite(alwaysRun = true)
     public void initializeTestReports(XmlTest xml) {
@@ -34,17 +33,10 @@ public class BaseTest {
         configurations.loadProperties(driverType, browser, runHeadless, env, mobileEmulation, deviceName, custom_capabilities,
                 platformName, platformVersion, serverUrl, deviceOrientation,deviceGroup, browserName, app, appPackage, appActivity,
                 autoAcceptAlerts, autoGrantPermissions, appWaitActivity, desiredCapabilities, noReset, fullReset);
-//        driver = DriverHelper.openBrowser(configurations);
     }
 
     public WebDriver getDriver(){
         return DriverHelper.openBrowser(configurations);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void AfterMethod(ITestResult result) {
-
-//        driver.close();
     }
 
     @AfterTest(alwaysRun = true)

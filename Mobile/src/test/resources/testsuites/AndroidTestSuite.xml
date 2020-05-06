@@ -1,19 +1,33 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="AndroidGoogleSuite" verbose="10" parallel="tests" thread-count="5">
-<!--    <parameter name="driver" value="web"></parameter>-->
+<suite name="AndroidTestSuite" verbose="10" parallel="false" thread-count="5">
 
-    <parameter name="runHeadless" value="false"></parameter>
+<!--    <test name="GoogleSuite">-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--&lt;!&ndash;               <include name="Google"/>&ndash;&gt;-->
+<!--            </run>-->
+<!--        </groups>-->
 
-    <test name="Chrome">
+<!--        <classes>-->
+<!--            <class name="testclasses.androidtest.AndroidGoogleTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Calculator Suite">
+        <parameter name="appPackage" value="com.android.calculator2"></parameter>
+        <parameter name="appActivity" value="com.android.calculator2.Calculator"></parameter>
+        <parameter name="platformName" value="Android"></parameter>
+        <parameter name="platformVersion" value="9.0"></parameter>
+        <parameter name="deviceName" value="Pixel 2 Pie 9.0 - API 28"></parameter>
 
         <groups>
             <run>
-<!--               <include name="Google"/>-->
+                <!--               <include name="Google"/>-->
             </run>
         </groups>
 
         <classes>
-            <class name="testclasses.androidtest.AndroidGoogleTest" />
+            <class name="testclasses.androidtest.AndroidCalculatorTest" />
         </classes>
     </test>
 

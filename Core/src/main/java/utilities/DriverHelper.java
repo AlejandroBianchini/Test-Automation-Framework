@@ -90,19 +90,14 @@ public class DriverHelper {
     }
 
     public static void initializeAppiumDriverCapabilities(Config config) {
-//        mobile = true;
         capabilities = new DesiredCapabilities();
-        // The generated session will be visible to you only.
+
         capabilities.setCapability("sessionName", "Automation test session");
         capabilities.setCapability("deviceOrientation", config.getConfig(Config.Param.DEVICEORIENTATION.getKey()));
-//        capabilities.setCapability("captureScreenshots", Boolean.valueOf(config.getConfig(Config.Param.CAPTURESCREENSHOTS.getKey()).toLowerCase()));
         capabilities.setCapability("deviceGroup", config.getConfig(Config.Param.DEVICEGROUP.getKey()));
         capabilities.setCapability("autoAcceptAlerts", Boolean.valueOf(config.getConfig(Config.Param.AUTOACCEPTALERTS.getKey()).toLowerCase()));
         capabilities.setCapability("noReset", config.getConfig(Config.Param.NORESET.getKey()));
         capabilities.setCapability("fullReset", config.getConfig(Config.Param.FULLRESET.getKey()));
-        // For deviceName, platformVersion Kobiton supports wildcard
-        // character *, with 3 formats: *text, text* and *text*
-        // If there is no *, Kobiton will match the exact text provided
         capabilities.setCapability("deviceName", config.getConfig(Config.Param.DEVICENAME.getKey()));
         capabilities.setCapability("platformVersion", config.getConfig(Config.Param.PLATFORMVERSION.getKey()));
         capabilities.setCapability("autoGrantPermissions", Boolean.valueOf(config.getConfig(Config.Param.AUTOGRANTPERMISSIONS.getKey()).toLowerCase()));
@@ -110,8 +105,13 @@ public class DriverHelper {
         capabilities.setCapability("appWaitActivity", config.getConfig(Config.Param.APPWAITACTIVITY.getKey()));
         // Open either a specified app or a web browser in the mobile device
         if (config.getConfig(Config.Param.APP.getKey()).isEmpty()) {
-            capabilities.setCapability("browserName", config.getConfig(Config.Param.BROWSERNAME.getKey()));
-        } else {
+            if (config.getConfig(Config.Param.APPACTIVITY.getKey()).isEmpty() || config.getConfig(Config.Param.APPPACKAGE.getKey()).isEmpty()){
+                capabilities.setCapability("browserName", config.getConfig(Config.Param.BROWSERNAME.getKey()));
+            }else {
+                capabilities.setCapability("appActivity", config.getConfig(Config.Param.APPACTIVITY.getKey()));
+                capabilities.setCapability("appPackage", config.getConfig(Config.Param.APPPACKAGE.getKey()));
+            }
+        } else  {
             // The maximum size of application is 500MB
             // By default, HTTP requests from testing library are expired
             // in 2 minutes while the app copying and installation may

@@ -6,36 +6,27 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.androidpages.AndroidGooglePage;
+import pages.androidpages.AndroidCalculatorPage;
 
 import java.io.IOException;
 
-public class AndroidGoogleTest extends AndroidBaseTest{
+public class AndroidCalculatorTest extends AndroidBaseTest{
 
-    private AndroidGooglePage androidGooglePage;
+    private AndroidCalculatorPage androidCalculatorPage;
     private MobileDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest(ITestResult result) throws IOException {
         driver = getMobileDriver();
-        androidGooglePage = new AndroidGooglePage(driver);
+        androidCalculatorPage = new AndroidCalculatorPage(driver);
         report.startTest(result);
     }
 
     @Test()
-    public void GoogleSearchTest(){
-        androidGooglePage.Goto();
-        androidGooglePage.searchSomething("selanium");
+    public void myFirstTest(){
+        String result = androidCalculatorPage.Sumar();
 
-        Assert.assertTrue(true);
-    }
-
-    @Test()
-    public void ReportTest(){
-        androidGooglePage.Goto();
-        androidGooglePage.searchSomething("selanium");
-
-        Assert.assertTrue(false);
+        Assert.assertEquals(result, "2");
     }
 
     @AfterMethod(alwaysRun = true)

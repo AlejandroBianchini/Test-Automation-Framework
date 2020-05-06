@@ -1,10 +1,12 @@
 package utilities;
 
+import io.appium.java_client.MobileDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Optional;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +18,6 @@ public class CommonsFunctions {
 
     protected CommonsFunctions(WebDriver _driver) throws IOException {
         driver = _driver;
-//        String url = new GlobalVariablesReader().getProperty("url");
-//        goTo(url);
     }
 
     public static void goTo(String url){
@@ -81,5 +81,21 @@ public class CommonsFunctions {
 
     public static void SwitchDefaultFrame() {
         driver.switchTo().defaultContent();
+    }
+
+    //Mobile Actions
+    public static void tap(WebElement element){
+        TouchAction touchAction = new TouchAction((MobileDriver) driver);
+        touchAction.tap(new ElementOption().withElement(element)).perform();
+    }
+
+    public static void press(WebElement element){
+        TouchAction touchAction = new TouchAction((MobileDriver)driver);
+        touchAction.press(new ElementOption().withElement(element)).perform();
+    }
+
+    public static void longPress(WebElement element){
+        TouchAction touchAction = new TouchAction((MobileDriver) driver);
+        touchAction.longPress(new ElementOption().withElement(element)).perform();
     }
 }

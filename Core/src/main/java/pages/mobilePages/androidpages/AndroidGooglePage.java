@@ -1,14 +1,11 @@
-package pages.androidpages;
+package pages.mobilePages.androidpages;
 
 import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import org.omg.CORBA.WStringSeqHelper;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.CommonsFunctions;
-import utilities.Config;
 
 import java.io.IOException;
 

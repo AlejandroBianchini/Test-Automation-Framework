@@ -1,4 +1,4 @@
-package pages.androidpages;
+package pages.mobilePages.androidpages;
 
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.CommonsFunctions;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class AndroidCalculatorPage extends CommonsFunctions {
         tap(btn1);
         btnEquals.click();
 
-        return waitVisibilityOf(panelResult, 5).getText();
+        return explicitElementWait(5, ExpectedConditions.visibilityOf(panelResult)).getText();
     }
 
 }

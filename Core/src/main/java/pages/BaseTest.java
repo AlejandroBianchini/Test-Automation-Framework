@@ -1,8 +1,7 @@
-package testclasses.androidtest;
+package pages;
 
 import io.appium.java_client.MobileDriver;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.xml.XmlTest;
 import utilities.Config;
@@ -11,7 +10,7 @@ import utilities.Report;
 
 import java.net.MalformedURLException;
 
-public class AndroidBaseTest {
+public class BaseTest {
     public Report report = new Report();
     Config configurations = null;
 
@@ -38,7 +37,7 @@ public class AndroidBaseTest {
                 autoAcceptAlerts, autoGrantPermissions, appWaitActivity, desiredCapabilities, noReset, fullReset);
     }
 
-    public WebDriver getWebDriver(){
+    public WebDriver getDriver(){
         return DriverHelper.openBrowser(configurations);
     }
 
@@ -49,6 +48,6 @@ public class AndroidBaseTest {
     @AfterTest(alwaysRun = true)
     public void AfterTest() {
 
-        report.generateReport();
+    report.generateReport();
     }
 }

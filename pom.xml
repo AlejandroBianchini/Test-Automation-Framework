@@ -24,6 +24,7 @@
 
     <modules>
         <module>Core</module>
+        <module>PagesProject</module>
         <module>Web</module>
         <module>Mobile</module>
     </modules>

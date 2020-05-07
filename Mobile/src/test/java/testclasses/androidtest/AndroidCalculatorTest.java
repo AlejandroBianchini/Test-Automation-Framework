@@ -6,11 +6,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.androidpages.AndroidCalculatorPage;
+import pages.BaseTest;
+import pages.mobilePages.androidpages.AndroidCalculatorPage;
 
 import java.io.IOException;
 
-public class AndroidCalculatorTest extends AndroidBaseTest{
+public class AndroidCalculatorTest extends BaseTest {
 
     private AndroidCalculatorPage androidCalculatorPage;
     private MobileDriver driver;

@@ -1,17 +1,19 @@
 package testclasses;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import io.appium.java_client.MobileDriver;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import pages.mobilePages.androidpages.AndroidGooglePage;
+import pages.webPages.HomePage;
+import pages.BaseTest;
 
 import java.io.IOException;
 
-public class HomePageTest extends BaseTest{
+public class HomePageTest extends BaseTest {
 
     private HomePage homePage;
     private WebDriver driver;
@@ -24,7 +26,7 @@ public class HomePageTest extends BaseTest{
     }
 
     @Test(description = "probando test en diferentes category")
-    public void pruebaOtraCategoryDeReporte() throws InvalidFormatException, IOException {
+    public void pruebaOtraCategoryDeReporte() {
 
         homePage.Buscar();
 
@@ -32,13 +34,22 @@ public class HomePageTest extends BaseTest{
     }
 
     @Test(description = "oootro test")
-    public void otroTest() throws IOException, InvalidFormatException {
-        Assert.fail();
+    public void testWebAndMobile() throws IOException {
+        homePage.Buscar();
+        driver.quit();
+
+        MobileDriver _driver = getMobileDriver();
+        AndroidGooglePage androidGooglePage = new AndroidGooglePage(_driver);
+
+        androidGooglePage.Goto();
+        androidGooglePage.searchSomething("Hola mundo");
+
+        Assert.assertTrue(true);
     }
 
     @AfterMethod(alwaysRun = true)
     public void afterTest(ITestResult result){
         report.addTestReport(result);
-        driver.quit();
+        homePage.quit();
     }
 }

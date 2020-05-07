@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class GlobalVariablesReader {
 
-    private final String GLOBAL_DATA_FILE_LOCATION = "../Web/src/test/resources/data/GlobalVariables.properties";
+    private final String GLOBAL_DATA_FILE_LOCATION = "../Core/src/main/resources/config/GlobalVariables.properties";
     private Properties properties;
 
     public GlobalVariablesReader() throws IOException {

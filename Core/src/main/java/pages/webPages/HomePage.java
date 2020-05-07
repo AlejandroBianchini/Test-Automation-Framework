@@ -1,4 +1,4 @@
-package pages;
+package pages.webPages;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.CommonsFunctions;
-import utilities.Config;
 import utilities.GlobalVariablesReader;
 
 import java.io.File;
@@ -33,15 +33,15 @@ public class HomePage extends CommonsFunctions {
         goTo(url);
     }
 
-    public void Buscar() throws IOException, InvalidFormatException {
-        waitElementToBeClickable(searchBar, 5);
+    public void Buscar() {
+        explicitElementWait(5, ExpectedConditions.elementToBeClickable(searchBar));
         searchBar.sendKeys("Selenium");
         searchBar.submit();
     }
 
     public String ObtieneResultado()
     {
-        waitElementToBeClickable(By.xpath("//*[@id='ZpxfC']/div/h3/span"), 5);
+        explicitElementWait(5, ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ZpxfC']/div/h3/span")));
         return findBy(By.xpath("//*[@id='ZpxfC']/div/h3/span")).getText();
     }
 

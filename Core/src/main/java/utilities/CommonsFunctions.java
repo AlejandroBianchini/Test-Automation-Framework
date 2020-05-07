@@ -5,7 +5,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.ElementOption;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -36,26 +36,6 @@ public class CommonsFunctions {
         return driver.findElements(by);
     }
 
-    protected static WebElement waitElementToBeClickable(WebElement element, int time) {
-        wait = new WebDriverWait(driver, time);
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    protected static WebElement waitElementToBeClickable(By by, int time) {
-        wait = new WebDriverWait(driver, time);
-        return wait.until(ExpectedConditions.elementToBeClickable(by));
-    }
-
-    public static WebElement waitVisibilityOf(WebElement element, int time) {
-        wait = new WebDriverWait(driver, time);
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public static WebElement waitVisibilityOfElementLocated(By by, int time) {
-        wait = new WebDriverWait(driver, time);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-    }
-
     public static void TakeScreenShot(String fileName, String path) throws IOException {
         TakesScreenshot scrShot =((TakesScreenshot)driver);
         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
@@ -63,6 +43,7 @@ public class CommonsFunctions {
         FileUtils.copyFile(SrcFile, DestFile);
     }
 
+    //Web Actions
     public static void SwitchWindow(String window) {
         driver.switchTo().window(window);
     }
@@ -98,4 +79,22 @@ public class CommonsFunctions {
         TouchAction touchAction = new TouchAction((MobileDriver) driver);
         touchAction.longPress(new ElementOption().withElement(element)).perform();
     }
+
+    //Explicit Waits
+
+    public static WebElement explicitElementWait(int time, ExpectedCondition<WebElement> expectedCondition){
+        wait = new WebDriverWait(driver, time);
+        return wait.until(expectedCondition);
+    }
+
+    public static Boolean explicitBooleanWait(int time, ExpectedCondition<Boolean> expectedCondition){
+        wait = new WebDriverWait(driver, time);
+        return wait.until(expectedCondition);
+    }
+
+    public static void explicitFrameWait(int time, ExpectedCondition<WebDriver> expectedCondition){
+        wait = new WebDriverWait(driver, time);
+        wait.until(expectedCondition);
+    }
+
 }
